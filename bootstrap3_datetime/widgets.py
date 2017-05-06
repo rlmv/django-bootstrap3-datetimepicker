@@ -2,7 +2,7 @@
 import django
 if django.VERSION >= (1,9):
     from django.forms.utils import flatatt
-else:    
+else:
     from django.forms.util import flatatt
 from django.forms.widgets import DateTimeInput
 from django.utils import translation
@@ -138,3 +138,11 @@ class DateTimePicker(DateTimeInput):
         else:
             js = ''
         return mark_safe(force_text(html + js))
+
+    # Override build_attrs to use old behavior
+    def build_attrs(self, extra_attrs=None, **kwargs):
+        "Helper function for building an attribute dictionary."
+        attrs = dict(self.attrs, **kwargs)
+        if extra_attrs:
+            attrs.update(extra_attrs)
+        return attrs
