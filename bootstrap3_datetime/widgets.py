@@ -26,19 +26,10 @@ lang_map = {
 
 class DateTimePicker(DateTimeInput):
     class Media:
-        class JsFiles(object):
-            def __iter__(self):
-                yield 'bootstrap3_datetime/js/moment.min.js'
-                yield 'bootstrap3_datetime/js/bootstrap-datetimepicker.min.js'
-                lang = translation.get_language()
-                if lang:
-                    lang = lang.lower()
-                    lang = lang_map.get(lang, lang)
-                    if lang not in ('en', 'en-us'):
-                        yield 'bootstrap3_datetime/js/locale/%s.js' % (lang)
-
-        js = JsFiles()
-        css = {'all': ('bootstrap3_datetime/css/bootstrap-datetimepicker.min.css',), }
+        js = ('bootstrap3_datetime/js/moment.min.js',
+              'bootstrap3_datetime/js/bootstrap-datetimepicker.min.js')
+        css = {'all':
+               ('bootstrap3_datetime/css/bootstrap-datetimepicker.min.css',), }
 
     # http://momentjs.com/docs/#/parsing/string-format/
     # http://docs.python.org/2/library/datetime.html#strftime-strptime-behavior
